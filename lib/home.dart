@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Myhome extends StatefulWidget {
   const Myhome({super.key});
@@ -8,39 +9,39 @@ class Myhome extends StatefulWidget {
 }
 
 class _MyhomeState extends State<Myhome> {
-  final List hotelList =[ 
+  final List hotelList = [
     {
-    'title' : 'Grand royl Hotel',
-    'place' : 'Webley London',
-    'distance' : 2,
-    'review' : 36,
-    'picture' : 'images/hotel1.jpg',
-    'price' : '188',
-  },
-   {
-    'title' : 'Grand royl Hotel',
-    'place' : 'Webley London',
-    'distance' : 3,
-    'review' : 13,
-    'picture' : 'images/hotel2.jpg',
-    'price' : '188',
-  },
-   {
-    'title' : 'Grand royl Hotel',
-    'place' : 'Webley London',
-    'distance' : 6,
-    'review' : 88,
-    'picture' : 'images/hotel1.jpg',
-    'price' : '188',
-  },
-   {
-    'title' : 'Grand royl Hotel',
-    'place' : 'Webley London',
-    'distance' : 11,
-    'review' : 34,
-    'picture' : 'images/hotel2.jpg',
-    'price' : '188',
-  },
+      'title': 'Grand royl Hotel',
+      'place': 'Webley London',
+      'distance': 2,
+      'review': 36,
+      'picture': 'images/hotel1.jpg',
+      'price': '188',
+    },
+    {
+      'title': 'Grand royl Hotel',
+      'place': 'Webley London',
+      'distance': 3,
+      'review': 13,
+      'picture': 'images/hotel2.jpg',
+      'price': '188',
+    },
+    {
+      'title': 'Grand royl Hotel',
+      'place': 'Webley London',
+      'distance': 6,
+      'review': 88,
+      'picture': 'images/hotel1.jpg',
+      'price': '188',
+    },
+    {
+      'title': 'Grand royl Hotel',
+      'place': 'Webley London',
+      'distance': 11,
+      'review': 34,
+      'picture': 'images/hotel2.jpg',
+      'price': '188',
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -197,23 +198,157 @@ class _MyhomeState extends State<Myhome> {
                           Text("Filters"),
                           IconButton(
                             onPressed: null,
-                             icon: Icon(Icons.filter_list_outlined),),
+                            icon: Icon(Icons.filter_list_outlined),
+                          ),
                         ],
                       )
                     ],
                   ),
                 ),
                 Column(
-                  children: 
-                    hotelList.map((hotel){ 
-                      return Container(
-                        child: Image.asset(hotel['picture']),
-
-                      );
-
-                    }).toList()
-
-                ),
+                    children: hotelList.map((hotel) {
+                  return Container(
+                    //child: Image.asset(hotel['picture']),
+                    margin: EdgeInsets.all(10),
+                    height: 230,
+                    width: double.infinity,
+                    color: Colors.white,
+                    //decoration: const BoxDecoration(
+                    //borderRadius: BorderRadius.all(Radius.circular(10)),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     spreadRadius: 4,
+                    //     blurRadius: 6,
+                    //     offset: Offset(0,3),
+                    //     color: Colors.grey.shade200
+                    //   )
+                    // ]
+                    //),
+                    child: Column(
+                      children: [
+                        Container(
+                            height: 148,
+                            decoration: BoxDecoration(
+                                // borderRadius: BorderRadius.only(
+                                //   topLeft: Radius.circular(18),
+                                //   topRight: Radius.circular(18),
+                                // ),
+                                image: DecorationImage(
+                                    image: AssetImage(hotel['picture']),
+                                    fit: BoxFit.cover)),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 5,
+                                  right: -15,
+                                  child: MaterialButton(
+                                    onPressed: () {},
+                                    color: Colors.white,
+                                    shape: CircleBorder(),
+                                    child: Icon(
+                                      Icons.favorite_outline_rounded,
+                                      color: Colors.green,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(hotel['title'],),
+                              Text('\$ ' + hotel['price'],
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold
+                              ),),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            Text(hotel['place'],
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey
+                              ),),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.place,
+                                    color: Colors.green,
+                                    size: 19,
+                                    ),
+                                    Text(hotel['distance'].toString() + 'km to city',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),)
+                                ],
+                              ),
+                              const Text('per night',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),)
+                          ],),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 3, 10, 0),
+                          child: Row(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_rate,
+                                     color: Colors.green,
+                                     size: 14,
+                                     ),
+                                       Icon(
+                                    Icons.star_rate,
+                                     color: Colors.green,
+                                     size: 14,
+                                     ),
+                                       Icon(
+                                    Icons.star_rate,
+                                     color: Colors.green,
+                                     size: 14,
+                                     ),
+                                       Icon(
+                                    Icons.star_rate,
+                                     color: Colors.green,
+                                     size: 14,
+                                     ),
+                                       Icon(
+                                    Icons.star_rate,
+                                     color: Colors.green,
+                                     size: 14,
+                                     ),
+                                ],
+                              ),
+                                 Text(hotel['review'].toString() + 'review',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
+                                    ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }).toList()),
               ],
             ),
           )
